@@ -2,6 +2,8 @@
 import asyncio
 import serial_asyncio
 import click
+import random
+from functools import partial
 
 
 com = '/dev/cu.usbmodem1411'

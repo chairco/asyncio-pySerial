@@ -7,6 +7,7 @@ name = "pypi"
 click = "*"
 pyserial = "*"
 pyserial-asyncio = "*"
+"flake8" = "*"
 
 [dev-packages]
 

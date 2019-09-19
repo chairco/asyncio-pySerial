@@ -1,0 +1,13 @@
+# Mac
+.DS_Store
+._*
+reader
+writer
+
+# Python virtualenv
+[.]venv
+env/
+module/
+asyncio_code/
+asyncio_pyserial/
+.vscode/

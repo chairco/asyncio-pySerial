@@ -51,7 +51,7 @@ async def consume(queue):
     while True:
         data = await queue.get()
         print(f'consuming: {id(data)}')
-        await asyncio.sleep(random.randint(0, 3))
+        await asyncio.sleep(random.randint(0, 6))
         queue.task_done()
 
 
@@ -63,8 +63,9 @@ async def main():
         loop, produce, com, baudrate
     )
     consumer_coro = consume(queue)
-    await producer_coro
-    await consumer_coro
+    #await producer_coro
+    #await consumer_coro
+    await asyncio.gather(producer_coro, consumer_coro)
 
 
 asyncio.run(main())

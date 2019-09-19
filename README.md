@@ -1,2 +1,2 @@
-# python-serial
+# asyncio-pySerial
 Python serial for Humans

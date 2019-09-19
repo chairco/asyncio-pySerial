@@ -6,14 +6,14 @@ import random
 from functools import partial
 
 
-com = '/dev/cu.usbmodem1411'
+com = '/dev/cu.usbmodem14201'
+#com = '/dev/ttys006'
 baudrate = 9600
 
 
 class Reader(asyncio.Protocol):
     """
     """
-
     def __init__(self, queue):
         """Store the queue.
         """
@@ -46,15 +46,30 @@ class Reader(asyncio.Protocol):
 
 
 async def consume(queue):
-    """Get serail data with async
+    """Get serail data from queue
     """
     while True:
         data = await queue.get()
         print(f'consuming: {id(data)}')
-        await asyncio.sleep(random.random())
+        await asyncio.sleep(random.randint(0, 3))
         queue.task_done()
 
 
+async def main():
+    loop = asyncio.get_event_loop()
+    queue = asyncio.Queue(loop=loop)
+    produce = partial(Reader, queue)
+    producer_coro = serial_asyncio.create_serial_connection(
+        loop, produce, com, baudrate
+    )
+    consumer_coro = consume(queue)
+    await producer_coro
+    await consumer_coro
+
+
+asyncio.run(main())
+
+'''before 3.7.0
 loop = asyncio.get_event_loop()
 queue = asyncio.Queue(loop=loop)
 
@@ -62,6 +77,12 @@ produce = partial(Reader, queue)
 producer_coro = serial_asyncio.create_serial_connection(
     loop, produce, com, baudrate
 )
+print(producer_coro)
 consumer_coro = consume(queue)
 loop.run_until_complete(asyncio.gather(producer_coro, consumer_coro))
 loop.close()
+'''
+
+
+
+

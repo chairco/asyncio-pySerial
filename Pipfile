@@ -8,6 +8,7 @@ click = "*"
 pyserial = "*"
 pyserial-asyncio = "*"
 "flake8" = "*"
+aioserial = "*"
 
 [dev-packages]
 

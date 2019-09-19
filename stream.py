@@ -1,11 +1,24 @@
 #-*- coding: utf-8 -*-
+
+# if want to test can use socat to create virtual serial:
+#   ex: socat -d -d -v pty,rawer,echo=0,link=./reader pty,rawer,echo=0,link=./writer
+   
+#   2019/04/09 11:16:09 socat[22919] N PTY is /dev/ttys000
+#   2019/04/09 11:16:09 socat[22919] N PTY is /dev/ttys006
+#   2019/04/09 11:16:09 socat[22919] N starting data transfer loop with FDs [5,5] and [8,8]
+# 
+#   ttys000 is write, ttys006 is read
+#   
+#   sample:
+#          echo "hello" > /dev/ttys006
+
 import asyncio
 import serial_asyncio
 import random
 
 
 # serial setting
-url = '/dev/cu.usbmodem1421'
+url = '/dev/cu.usbmodem14201'
 url2 = '/dev/cu.usbserial-AL016RPE'
 port = 9600
 

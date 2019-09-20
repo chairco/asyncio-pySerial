@@ -22,7 +22,7 @@ async def produce(queue, url, **kwargs):
         msg = await get(ser)
         log.info(f"produce id: {id(msg)}, device:{msg.split(',')[2:4]}, msg:{repr(msg)}")
         await queue.put(msg)
-        await asyncio.sleep(random.randint(0,3))
+        #await asyncio.sleep(random.randint(0,3))
 
 
 async def consume(queue):

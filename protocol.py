@@ -6,8 +6,8 @@ import random
 from functools import partial
 
 
-com = '/dev/cu.usbmodem14201'
-#com = '/dev/ttys006'
+#com = '/dev/cu.usbmodem14201'
+com = '/dev/ttys005'
 baudrate = 9600
 
 
@@ -51,7 +51,8 @@ async def consume(queue):
     while True:
         data = await queue.get()
         print(f'consuming: {id(data)}')
-        await asyncio.sleep(random.randint(0, 6))
+        #await asyncio.sleep(random.randint(0, 6))
+        await asyncio.sleep(3)
         queue.task_done()
 
 
@@ -63,14 +64,14 @@ async def main():
         loop, produce, com, baudrate
     )
     consumer_coro = consume(queue)
-    #await producer_coro
-    #await consumer_coro
-    await asyncio.gather(producer_coro, consumer_coro)
+    await producer_coro
+    await consumer_coro
+    #await asyncio.gather(producer_coro, consumer_coro)
 
 
-asyncio.run(main())
+#asyncio.run(main()) # after 3.7.0
 
-'''before 3.7.0
+# before 3.7.0
 loop = asyncio.get_event_loop()
 queue = asyncio.Queue(loop=loop)
 
@@ -82,7 +83,7 @@ print(producer_coro)
 consumer_coro = consume(queue)
 loop.run_until_complete(asyncio.gather(producer_coro, consumer_coro))
 loop.close()
-'''
+
 
 
 

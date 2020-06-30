@@ -3,7 +3,7 @@ import threading
 import serial
 import queue
 
-#port = '/dev/cu.usbmodem1411'
+# port = '/dev/cu.usbmodem1411'
 port = '/dev/ttys006'
 baud = 9600
 

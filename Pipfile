@@ -9,6 +9,7 @@ pyserial = "*"
 pyserial-asyncio = "*"
 "flake8" = "*"
 aioserial = "*"
+pep8 = "*"
 
 [dev-packages]
 

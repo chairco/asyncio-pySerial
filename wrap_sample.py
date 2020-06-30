@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from serial import Serial
 from utility.syncasync import *
 
@@ -9,7 +9,7 @@ import logging
 import sys
 
 
-#url = '/dev/cu.usbmodem14101'
+# url = '/dev/cu.usbmodem14101'
 url = '/dev/ttys005'
 port = 9600
 
@@ -20,9 +20,11 @@ async def produce(queue, url, **kwargs):
     ser = Serial(url, baudrate=9600)
     while True:
         msg = await get(ser)
-        log.info(f"produce id: {id(msg)}, device:{msg.split(',')[2:4]}, msg:{repr(msg)}")
+        log.info(f"produce id: {id(msg)},"
+                 f"device:{msg.split(',')[2:4]},"
+                 f"msg:{repr(msg)}")
         await queue.put(msg)
-        #await asyncio.sleep(random.randint(0,3))
+        # await asyncio.sleep(random.randint(0,3))
 
 
 async def consume(queue):
@@ -37,7 +39,7 @@ async def consume(queue):
         # process the data
         log.info(f"consuming id: {id(data)}")
         # simulate i/o operation using sleep
-        #await asyncio.sleep(random.randint(0,3))
+        # await asyncio.sleep(random.randint(0,3))
         await asyncio.sleep(3)
         # Notify the queue that the item has been processed
         queue.task_done()
